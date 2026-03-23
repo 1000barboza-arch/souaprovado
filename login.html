@@ -66,6 +66,51 @@ margin-top:10px;
 <a href="#">Criar conta</a>
 
 </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
+<script>
+
+const supabaseClient = supabase.createClient(
+"https://jztxwuuulqnkbmyrotsy.supabase.co",
+"sb_publishable_ZVvTelS3UO5gf_Mg5XScw_pm34iSQp"
+);
+
+async function cadastrar(){
+
+let email = document.getElementById("email").value;
+let senha = document.getElementById("senha").value;
+
+const { data, error } = await supabaseClient.auth.signUp({
+email: email,
+password: senha
+});
+
+if(error){
+alert(error.message);
+}else{
+alert("Cadastro realizado!");
+}
+
+}
+
+async function login(){
+
+let email = document.getElementById("email").value;
+let senha = document.getElementById("senha").value;
+
+const { data, error } = await supabaseClient.auth.signInWithPassword({
+email: email,
+password: senha
+});
+
+if(error){
+alert("Login inválido");
+}else{
+window.location.href="dashboard.html";
+}
+
+}
+
+</script>
 </body>
 </html>
